@@ -1,37 +1,27 @@
 import dotenv from "dotenv";
 dotenv.config();
-
+let carritoDao;
 let productosDao;
+
 switch (procees.env.DB_NAME) {
   case "mongoDB":
     import("./productos/mongoProductos.js").then(({ MongoProductos }) => {
       productosDao = new MongoProductos();
-    });
-    break;
-  case "firebase":
-    import("./productos/firebaseProductos.js").then(({ FirebaseProductos }) => {
-      productosDao = new FirebaseProductos();
-    });
-    break;
-  default:
-    console.log("Esta en default");
-    break;
-}
-
-let carritoDao;
-switch (process.env.DB_NAME) {
-  case "mongoDB":
-    import("./carrito/mongodbCarritos.js").then(({ MongoCarritos }) => {
+    })
+    import("./carrito/mongoCarritos.js").then(({ MongoCarritos }) => {
       carritoDao = new MongoCarritos();
-    });
+    })
     break;
   case "firebase":
+    import("./carrito/mongoCarritos.js").then(({ MongoCarritos }) => {
+      carritoDao = new MongoCarritos();
+    })
     import("./carrito/firebaseCarrito.js").then(({ FirebaseCarritos }) => {
       productosDao = new FirebaseCarritos();
-    });
+    })
     break;
   default:
-    console.log("Esta en default");
+    throw new Error("No se ha definido una conexión a la base de datos");
     break;
 }
 
