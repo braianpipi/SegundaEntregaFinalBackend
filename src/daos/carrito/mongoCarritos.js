@@ -30,8 +30,19 @@ export class MongoCarritos extends MongoClass {
     );
     return carritoUpdated;
   }
-
-  async deleteProducto(carrito, productoId) {
+  async deleteCart(id) {
+    try {
+      const nuevoCarrito = await this.collection.deleteOne({ _id: id });
+      if (nuevoCarrito.deletedCount == 0) {
+        return null;
+      } else {
+        return nuevoCarrito;
+      }
+    } catch (error) {
+      throw new Error("No se encontro ningun carrito con ese ID");
+    }
+  }
+  async deleteProduct(carrito, productoId) {
     const productoEnCarrito = carrito.productos.find(
       (p) => p._id == productoId
     );

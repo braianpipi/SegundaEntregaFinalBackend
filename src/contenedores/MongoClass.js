@@ -15,6 +15,14 @@ class MongoClass {
       throw new Error("error :", error);
     }
   }
+  async getbyI(id){
+    try {
+      const elemento = await this.collection.findById(id)
+      return elemento
+    } catch (error) {
+      throw new Error("error :", error);
+    }
+  }
   async create(obj) {
     try {
       const nuevoProducto = await this.collection.create(obj);
