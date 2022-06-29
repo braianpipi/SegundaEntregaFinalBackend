@@ -11,7 +11,7 @@ export default {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     },
-  },
+  }
 
 //   FirebaseFirestore:{
 //     let admin = require("firebase-admin");

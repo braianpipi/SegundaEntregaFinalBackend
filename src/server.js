@@ -1,11 +1,12 @@
 import express from "express";
 import productosRoutes from './routes/productosRoutes.js'
 import carritoRoutes from './routes/carritoRoutes.js'
+import morgan from 'morgan'      
 const app = express()
-
+app.use(morgan("dev"));
 app.use(express.json())
-app.use('api/productos', productosRoutes)
-app.use('api/carrito', carritoRoutes)
+app.use('/api/productos', productosRoutes)
+app.use('/api/carrito', carritoRoutes)
 
 
 // let admin = require("firebase-admin");
